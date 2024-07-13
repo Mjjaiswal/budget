@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Exprnse;
+use App\Exports\ExpenseReportExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DashboardController extends Controller
 {
@@ -13,8 +15,18 @@ class DashboardController extends Controller
         return view('dashboard',compact('expense','incomes'));
     }
 
-    public function exprnseReport(){
+    public function exprnseReport(Request $request){
+        $exprnses = Exprnse::where('user_id',auth()->id());
+        if(!empty($request->type)){
+            $exprnses->where('type',$request->type);
+        }
+        $exprnses = $exprnses->paginate(10);
+        
+        return view('report',compact('exprnses'));
+    }
 
-        return view('report');
+    public function export()
+    {
+        return Excel::download(new ExpenseReportExport, 'exprnses.xlsx');
     }
 }

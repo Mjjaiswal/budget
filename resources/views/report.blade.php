@@ -24,15 +24,16 @@
                         <div class="col-sm-3">
                             <select class="form-control" name="type">
                                 <option value="">Select Type</option>
-                                <option value="1">Incomes</option>
-                                <option value="2">Expenses</option>
+                                <option value="1" {{ (request('type') == 1) ? 'selected' :'' }}>Incomes</option>
+                                <option value="2" {{ (request('type') == 2) ? 'selected' :'' }}>Expenses</option>
                             </select>
                         </div>
                         <div class="col-sm-3"></div>
                         <div class="col-sm-3"></div>
                         <div class="col-sm-3">
                             <button class="btn btn-primary float-right ml-2">Filter</button>
-                            <button class="btn btn-danger float-right">Reset</button>
+                            <a href="{{ route('export') }}" class="btn btn-info float-right ml-2">Export</a>
+                            <a href="{{ route('exprnseReport') }}" class="btn btn-danger float-right">Reset</a>
                         </div>
                     </div>
                 </form>
@@ -45,7 +46,6 @@
                             <th>Date</th>
                             <th>Amount</th>
                             <th>Description</th>
-                            <th style="width:10%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,6 +64,9 @@
                         @endif
                     </tbody>
                 </table>
+            </div>
+            <div class="card-footer">
+                {{ $exprnses->links('vendor.pagination.bootstrap-5') }}
             </div>
         </div>
     </section>
