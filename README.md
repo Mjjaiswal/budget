@@ -9,11 +9,11 @@
 
 ## Setup Project and run this cmd
 
-composer update 
+- composer update 
 or
-composer install
-php artisan migrate
-php artisan ser
+- composer install
+- php artisan migrate
+- php artisan ser
 
 ## About Laravel
 
