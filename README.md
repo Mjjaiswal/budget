@@ -13,7 +13,7 @@
 or
 - composer install
 - php artisan migrate
-- php artisan ser
+- php artisan serve
 
 ## About Laravel
 
